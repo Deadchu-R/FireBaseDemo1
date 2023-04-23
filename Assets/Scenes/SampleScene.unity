@@ -932,7 +932,7 @@ MonoBehaviour:
   loginButton: {fileID: 402036690}
   usernameInputField: {fileID: 1482707558}
   passwordInputField: {fileID: 1602314985}
-  fireBaseURL: //https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Player%20Items/sAbq4iNl3eXFeXIyagTa
+  fireBaseURL: https://firestore.googleapis.com/v1/projects/game-development-proj-85450/databases/(default)/documents/Player
 --- !u!4 &841927745
 Transform:
   m_ObjectHideFlags: 0
