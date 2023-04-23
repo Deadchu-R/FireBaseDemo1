@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
 
     }
+    [ContextMenu("Get Data")]
     private void GetData()
     {
          StartCoroutine(GetRequest(fireBaseURL));
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
-     
+            Debug.Log("<color=green>sended requesrt</color>");
 
             switch (webRequest.result)
             {
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
                     Debug.LogError( ":HTTP HTTP Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(  ":\nReceived: " + webRequest.downloadHandler.text);
+                    Debug.Log("<color=lightblue> :\nReceived: " + webRequest.downloadHandler.text+"</color>");
                     fireBaseText = webRequest.downloadHandler.text.ToString();
                     break;
             }
