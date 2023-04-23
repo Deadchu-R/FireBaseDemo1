@@ -28,7 +28,7 @@ public class FireBaseManager : MonoBehaviour
     void Start()
     {
         // A correct website page.
-        StartCoroutine(GetRequest("https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Players"));
+        //StartCoroutine(GetRequest("https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Players"));
         
     }
 

@@ -932,7 +932,7 @@ MonoBehaviour:
   loginButton: {fileID: 402036690}
   usernameInputField: {fileID: 1482707558}
   passwordInputField: {fileID: 1602314985}
-  fireBaseURL: https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Players
+  fireBaseURL: //https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Player%20Items/sAbq4iNl3eXFeXIyagTa
 --- !u!4 &841927745
 Transform:
   m_ObjectHideFlags: 0
@@ -2405,7 +2405,6 @@ GameObject:
   - component: {fileID: 2042164121}
   - component: {fileID: 2042164120}
   - component: {fileID: 2042164119}
-  - component: {fileID: 2042164118}
   m_Layer: 0
   m_Name: PlayerCube
   m_TagString: Untagged
@@ -2413,31 +2412,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2042164118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042164117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e81e0f097b393b4497bca2f1b55af10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: 
-  playerScore: 0
-  playerLevel: 0
-  playerHealth: 0
-  playerMana: 0
-  playerStamina: 0
-  playerStrength: 0
-  playerDexterity: 0
-  playerIntelligence: 0
-  playerWisdom: 0
-  playerConstitution: 0
-  playerCharisma: 0
-  playerLuck: 0
 --- !u!65 &2042164119
 BoxCollider:
   m_ObjectHideFlags: 0

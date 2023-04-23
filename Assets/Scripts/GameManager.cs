@@ -1,13 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject loginCanvas;
@@ -16,10 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private string fireBaseURL;
-    private string fireBaseText;
-    private List<string> fireBaseList;
-    
-
     private void Awake()
     {
         loginCanvas.SetActive(true);
@@ -41,21 +34,7 @@ public class GameManager : MonoBehaviour
     }
     public void Login()
     {
-        Debug.Log("LoginStringIs: " + fireBaseURL);
        GetData();
-           //wait for data to be retrieved from firebase before continuing to next line of code
-         fireBaseList = new List<string>(fireBaseText.Split(','));
-           //FIREBASE URE: https://firestore.googleapis.com/v1/projects/testingoftiltan/databases/(default)/documents/Players
-           //Split the string into a list of documents (id's)
-           //foreach (string document in fireBaseList)
-           // check if password and username match
-           // if they do, then load the game
-    
-      
-        loginCanvas.SetActive(false);
-        userInterfaceCanvas.SetActive(true);
-
-
     }
     [ContextMenu("Get Data")]
     private void GetData()
@@ -69,7 +48,7 @@ public class GameManager : MonoBehaviour
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
-            Debug.Log("<color=green>sended requesrt</color>");
+            Debug.Log("<color=green>sended WEB requesrt--></color>");
 
             switch (webRequest.result)
             {
@@ -81,11 +60,81 @@ public class GameManager : MonoBehaviour
                     Debug.LogError( ":HTTP HTTP Error: " + webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log("<color=lightblue> :\nReceived: " + webRequest.downloadHandler.text+"</color>");
-                    fireBaseText = webRequest.downloadHandler.text.ToString();
+                    Debug.Log(webRequest.downloadHandler.text);
+                    LoginValidation(webRequest);
                     break;
             }
         }
     }
+    void LoginValidation(UnityWebRequest webRequest) 
+    {
+
+
+            DocumentWrapper playersData = JsonUtility.FromJson<DocumentWrapper>(webRequest.downloadHandler.text);
+        foreach (Document player in playersData.documents)
+        {
+            if (player.fields.UserName.stringValue.Equals(usernameInputField.text) && player.fields.Password.stringValue.Equals(passwordInputField.text))
+            {
+                Debug.Log("Loged In Successfully");
+                loginCanvas.SetActive(false);
+                userInterfaceCanvas.SetActive(true);
+            }
+        }
+    }
+
 }
+
+[System.Serializable]
+public class DocumentWrapper
+{
+    public Document[] documents;
+
+    public DocumentWrapper(Document[] documents)
+    {
+        this.documents = documents;
+    }
+}
+
+[System.Serializable]
+public class Document
+{
+    public string name;
+    public Fields fields;
+    public string createTime;
+    public string updateTime;
+
+    public Document(string name, Fields fields, string createTime,string updateTime)
+    {
+        this.name = name;
+        this.fields = fields;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+}
+
+[System.Serializable]
+public class Fields
+{
+    public Password Password;
+    public UserName UserName;
+}
+
+[System.Serializable]
+public class Password
+{
+    public string stringValue;
+}
+
+[System.Serializable]
+public class UserName
+{
+    public string stringValue;
+}
+
+
+
+
+
+
+
 
